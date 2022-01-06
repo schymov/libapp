@@ -8,6 +8,6 @@ export class TestService {
   constructor(private httpClient: HttpClient) { }
 
   get(): Observable<any>{
-    return this.httpClient.get(`http://localhost:3000/`);
+    return this.httpClient.get(`http://localhost:3000/lib/books`);
   }
 }
