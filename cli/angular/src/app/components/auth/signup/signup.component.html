@@ -1,1 +1,117 @@
-<p>signup works!</p>
+<mat-card-title>SIGNUP </mat-card-title>
+<mat-card-subtitle>Join lipapp today</mat-card-subtitle>
+<mat-card-content>
+  <form class="example-form" [formGroup]="authForm">
+    <mat-form-field
+      hintLabel="Max 30 characters"
+      appearance="fill"
+      class="example-full-width"
+    >
+      <mat-label>Username</mat-label>
+      <input
+        formControlName="username"
+        matInput
+        #input
+        maxlength="30"
+        placeholder="Mr. Anderson"
+      />
+      <mat-hint align="end">{{ input.value?.length || 0 }}/30</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        formControlName="email"
+        type="email"
+        matInput
+        placeholder="example@itspartner.net"
+      />
+      <mat-error
+        *ngIf="
+          authForm.controls['email'].hasError('email') &&
+          !authForm.controls['email'].hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="authForm.controls['email'].hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        formControlName="password"
+        matInput
+        [type]="hide.password ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide.password = !hide.password"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{
+          hide.password ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      <mat-error *ngIf="authForm.controls['password'].hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        formControlName="confirmPassword"
+        matInput
+        [type]="hide.confirmPassword ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide.confirmPassword = !hide.confirmPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{
+          hide.confirmPassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      <mat-error
+        *ngIf="authForm.controls['confirmPassword'].hasError('required')"
+      >
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="passwords-error">
+      <mat-error
+        *ngIf="
+          authForm.hasError('notmatched') &&
+          !authForm.controls['confirmPassword'].hasError('required') &&
+          !authForm.controls['password'].hasError('required')
+        "
+      >
+        Passwords do not match. Please try again
+      </mat-error>
+    </div>
+  </form>
+</mat-card-content>
+<mat-card-actions>
+  <button
+    mat-stroked-button
+    color="primary"
+    routerLink="../signin"
+    routerLinkActive="active"
+  >
+    Back
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="signUp()"
+    [disabled]="authForm.invalid"
+  >
+    SignUp
+  </button>
+</mat-card-actions>

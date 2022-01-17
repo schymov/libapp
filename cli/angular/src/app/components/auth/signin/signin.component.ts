@@ -17,7 +17,7 @@ export class SigninComponent implements OnInit {
   constructor(private testService: TestService) {}
 
   ngOnInit(): void {
-    this.testService.get().subscribe((result) => console.log(result));
+    // this.testService.get().subscribe((result) => console.log(result));
   }
 
   signIn() {

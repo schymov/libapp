@@ -5,7 +5,10 @@
   justify-content: center;
   align-items: center;
   .card {
-    width: 30%;
-    min-height: 300px;
+    width: 350px;
+    min-height: 260px;
+    &__wrap {
+      text-align: center;
+    }
   }
 }
