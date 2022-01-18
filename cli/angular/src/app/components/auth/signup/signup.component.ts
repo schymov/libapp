@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TestService } from '../../../services/test.service';
+import { SingupService } from "../../../services/singup.service";
 
 @Component({
   selector: 'app-signup',
@@ -30,7 +31,7 @@ export class SignupComponent implements OnInit {
     { validators: passwordMatchingValidatior }
   );
 
-  constructor() {}
+  constructor(private singupService: SingupService) {}
 
   ngOnInit(): void {
     // this.testService.get().subscribe((result) => console.log(result));
@@ -38,6 +39,7 @@ export class SignupComponent implements OnInit {
 
   signUp() {
     console.log(this.authForm.value);
+    this.singupService.postUser(this.authForm.value);
   }
 }
 

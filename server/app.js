@@ -18,19 +18,20 @@ app.listen(port, () => {
 });
 
 mongoose
-  .connect(keys.mongoURI, {
+    .connect(keys.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("mongoDB connected"))
-  .catch((error) => console.log(error));
+  .then(() => console.log("mongoDB connected"),
+  error => console.log(error)
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("cors")());
 
 // app.use("/auth/signin", signin);
-// app.use("/auth/signup", signup);
+app.use("/auth/signup", signup);
 app.use("/lib/books", books);
 
 module.exports = app;
