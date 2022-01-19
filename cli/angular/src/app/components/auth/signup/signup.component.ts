@@ -7,7 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { TestService } from '../../../services/test.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -32,9 +32,7 @@ export class SignupComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    // this.testService.get().subscribe((result) => console.log(result));
-  }
+  ngOnInit(): void {}
 
   signUp() {
     console.log(this.authForm.value);

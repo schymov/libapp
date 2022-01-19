@@ -12,9 +12,16 @@ import { SigninComponent } from './components/auth/signin/signin.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, SignupComponent, SigninComponent],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+    SignupComponent,
+    SigninComponent,
+    MainComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
