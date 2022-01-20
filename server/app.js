@@ -29,8 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("cors")());
 
-// app.use("/auth/signin", signin);
+app.use("/auth/signin", signin);
 // app.use("/auth/signup", signup);
-app.use("/lib/books", books);
+// app.use("/lib/books", books);
 
 module.exports = app;

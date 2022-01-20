@@ -21,4 +21,4 @@ const bookSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("users", bookSchema); //check users
+module.exports = mongoose.model("books", bookSchema); //check users
