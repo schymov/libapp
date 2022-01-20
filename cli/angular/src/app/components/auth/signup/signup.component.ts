@@ -10,6 +10,7 @@ import {
 import { SingupService } from "../../../services/singup.service";
 import { MatDialog } from "@angular/material/dialog";
 import { PopUpComponent } from "../../pop-up/pop-up.component";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -34,8 +35,7 @@ export class SignupComponent implements OnInit {
 
   constructor(private singupService: SingupService, private dialogRef: MatDialog) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   signUp() {
     this.singupService.postUser(this.authForm.value).subscribe((result) => {

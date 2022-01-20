@@ -14,9 +14,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from "@angular/material/dialog";
 import { PopUpComponent } from './components/pop-up/pop-up.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, SignupComponent, SigninComponent, PopUpComponent],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+    SignupComponent,
+    SigninComponent,
+    MainComponent,
+    PopUpComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

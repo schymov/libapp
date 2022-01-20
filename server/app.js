@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-// app.use("/auth/signin", signin);
+app.use("/auth/signin", signin);
 app.use("/auth/signup", signup);
 app.use("/lib/books", books);
 
