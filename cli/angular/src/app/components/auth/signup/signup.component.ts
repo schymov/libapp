@@ -7,8 +7,9 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { TestService } from '../../../services/test.service';
 import { SingupService } from "../../../services/singup.service";
+import { MatDialog } from "@angular/material/dialog";
+import { PopUpComponent } from "../../pop-up/pop-up.component";
 
 @Component({
   selector: 'app-signup',
@@ -31,15 +32,21 @@ export class SignupComponent implements OnInit {
     { validators: passwordMatchingValidatior }
   );
 
-  constructor(private singupService: SingupService) {}
+  constructor(private singupService: SingupService, private dialogRef: MatDialog) {}
 
   ngOnInit(): void {
-    // this.testService.get().subscribe((result) => console.log(result));
   }
 
   signUp() {
-    console.log(this.authForm.value);
-    this.singupService.postUser(this.authForm.value);
+    this.singupService.postUser(this.authForm.value).subscribe((result) => {
+      this.dialogRef.open(PopUpComponent, {
+        data: {
+          message: "Registration was successfully completed",
+          buttonText: "Ok",
+          redirect: "/auth/signin",
+        }
+      });
+    });
   }
 }
 

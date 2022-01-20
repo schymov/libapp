@@ -12,9 +12,11 @@ import { SigninComponent } from './components/auth/signin/signin.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from "@angular/material/dialog";
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, SignupComponent, SigninComponent],
+  declarations: [AppComponent, AuthComponent, SignupComponent, SigninComponent, PopUpComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -26,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -12,7 +12,7 @@ module.exports.signup = async (req, res) => {
       pwd: req.body.pwd,
     })
     newUser.save()
-        .then(res.json)
+        .then(res.json(newUser))
         .catch(e => res.status(500).json({ message: e.message }))
   } catch (e) {
     errorHandler(res, e);

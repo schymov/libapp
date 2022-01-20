@@ -11,10 +11,7 @@ const userSchema = new Schema({
   pwd: {
     type: String,
   },
-  favorites: {
-    employee: [String],
-    default: [],
-  }
+  favorites: [],
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("users", userSchema);
