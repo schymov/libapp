@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import {BooksService} from "../../services/books.service";
+
+interface Book {
+  "_id": {
+    "$oid": "61ea992d29464df0d923b371"
+  },
+  "name": string,
+  "author": string,
+  "year": string,
+  "img": string,
+  "id": string
+}
 
 @Component({
   selector: 'app-main',
@@ -7,9 +19,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  isDataAvailable:boolean = false;
+  booksData: any;
+  constructor(private booksService: BooksService) {
+  }
 
   ngOnInit(): void {
+    this.getAllBooks();
+  }
+
+  getAllBooks() {
+    this.booksService.getAllBooks().subscribe(result => {
+      this.booksData = result;
+      this.isDataAvailable = true;
+    })
   }
 
 }

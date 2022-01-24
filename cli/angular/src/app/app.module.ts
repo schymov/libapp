@@ -13,8 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from "@angular/material/dialog";
-import { PopUpComponent } from './components/pop-up/pop-up.component';
+import { PopUpComponent } from './common/pop-up/pop-up.component';
 import { MainComponent } from './components/main/main.component';
+import { BooksTableComponent } from './common/books-table/books-table.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { MainComponent } from './components/main/main.component';
     SigninComponent,
     MainComponent,
     PopUpComponent,
+    BooksTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,9 @@ import { MainComponent } from './components/main/main.component';
     ReactiveFormsModule,
     MatIconModule,
     MatDialogModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
