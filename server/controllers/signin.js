@@ -12,6 +12,7 @@ module.exports.signin = async (req, res) => {
         const token = jwt.sign(
           // добавляем данные в объект, который ляжет в localStore
           {
+            id: user._id,
             email: user.email,
             username: user.username,
           },
