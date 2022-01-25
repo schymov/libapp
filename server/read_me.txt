@@ -1,14 +1,15 @@
 To start server enter =>
 
-$ node server/app.js
-and open http://localhost:3000/
-
-or
-
 $ cd server
-$ node app.js
-and open http://localhost:3000/
+$ npm run server
 
-// localhost:3000/lib/books
-// localhost:3000/auth/signup
-// localhost:3000/auth/signin
+ POST /auth/signup
+ POST /auth/signin
+ GET /lib/books
+ GET /user/{{id}}
+ GET /user/{{id}}
+ PATCH /user/{{id}}/favorites
+
+localhost:3000/auth/signup
+localhost:3000/auth/signin
+localhost:3000/main
