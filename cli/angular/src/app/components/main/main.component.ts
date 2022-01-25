@@ -13,10 +13,12 @@ interface Book {
   "id": string
 }
 
+declare const google: any;
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
 
@@ -29,6 +31,18 @@ export class MainComponent implements OnInit {
   constructor(private booksService: BooksService, private favoritesServise: FavoritesService) {
   }
 
+  bookreader(id: string) {
+    google.books.load();
+
+    function initialize(id: string) {
+      const viewer = new google.books.DefaultViewer(
+        document.getElementById('viewerCanvas')
+      );
+      viewer.load(id);
+    }
+    google.books.setOnLoadCallback(() => initialize(id));
+  }
+
   ngOnInit(): void {
     this.getAllBooks();
     this.userInfo = {
@@ -38,6 +52,8 @@ export class MainComponent implements OnInit {
       ]
     };
 /*    this.getUserInfo();*/
+    //test opening bookreader
+    // this.bookreader('F1QDAAAAQAAJ');
   }
 
   getAllBooks() {
