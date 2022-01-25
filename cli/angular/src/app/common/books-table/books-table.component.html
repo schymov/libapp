@@ -6,7 +6,7 @@
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="book">
-      <th class="book" mat-header-cell *matHeaderCellDef mat-sort-header> Book </th>
+      <th class="book" mat-header-cell *matHeaderCellDef> Book </th>
       <td class="book" mat-cell *matCellDef="let row"><img class="bookImg" src={{row.img}}></td>
     </ng-container>
 
@@ -28,8 +28,8 @@
     <ng-container matColumnDef="favorite">
       <th class="favorite" mat-header-cell *matHeaderCellDef> Favorite </th>
       <td class="favorite" mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary">
-          <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        <button mat-icon-button (click)="favoriteClick($event.currentTarget, row.id)">
+          <mat-icon aria-label="Example icon-button with a heart icon" color="primary" [ngStyle]="{opacity: getOpacity(row.isFavorite)}">favorite</mat-icon>
         </button>
       </td>
     </ng-container>

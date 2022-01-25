@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BooksService} from "../../services/books.service";
+import {FavoritesService} from "../../services/favorites.service";
 
 interface Book {
   "_id": {
@@ -19,20 +20,37 @@ interface Book {
 })
 export class MainComponent implements OnInit {
 
-  isDataAvailable:boolean = false;
+  isBooksDataAvailable:boolean = false;
   booksData: any;
-  constructor(private booksService: BooksService) {
+  isUserDataAvailable:boolean = true;
+  userInfo: any;
+  isDataAvailable:boolean = false;
+
+  constructor(private booksService: BooksService, private favoritesServise: FavoritesService) {
   }
 
   ngOnInit(): void {
     this.getAllBooks();
+    this.userInfo = {
+      favorites: [
+        "mhNAAAAAYAAJ",
+        "dhjuAAAAMAAJ",
+      ]
+    };
+/*    this.getUserInfo();*/
   }
 
   getAllBooks() {
     this.booksService.getAllBooks().subscribe(result => {
       this.booksData = result;
-      this.isDataAvailable = true;
+      this.isBooksDataAvailable = true;
+      this.isDataAvailable = this.isBooksDataAvailable && this.isUserDataAvailable;
     })
   }
-
+  getUserInfo() {
+    this.favoritesServise.getUserInfo().subscribe(result => {
+      this.userInfo = result;
+      this.isUserDataAvailable = true;
+    })
+  }
 }
