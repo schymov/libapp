@@ -2,29 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class FavoritesService {
+export class UserService {
 
   private user = localStorage.getItem('userInfo');
-  userId: any;
+  userId: string;
 
   constructor(private httpClient: HttpClient) {
     if (typeof this.user === "string") {
-      this.userId = JSON.parse(this.user).username
+      this.userId = JSON.parse(this.user).id
     } else {
-      this.userId = null
+      this.userId = ""
     }
   }
 
   getUserInfo() {
-      return this.httpClient.get(`http://localhost:3000/user/${this.userId}`);
-      console.log("get favorites");
+    return this.httpClient.get(`http://localhost:3000/user/${this.userId}`);
   }
 
   changeUserFavorite(bookId: string) {
-    const body = ({
+    const body = {
       bookId: bookId
-    });
-    console.log(body);
+    };
     return this.httpClient.patch(
       `http://localhost:3000/user/${this.userId}/favorites`,
       body);

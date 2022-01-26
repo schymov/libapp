@@ -28,7 +28,7 @@
     <ng-container matColumnDef="favorite">
       <th class="favorite" mat-header-cell *matHeaderCellDef> Favorite </th>
       <td class="favorite" mat-cell *matCellDef="let row">
-        <button mat-icon-button (click)="favoriteClick($event.currentTarget, row.id)">
+        <button mat-icon-button (click)="favoriteClick(row._id)">
           <mat-icon aria-label="Example icon-button with a heart icon" color="primary" [ngStyle]="{opacity: getOpacity(row.isFavorite)}">favorite</mat-icon>
         </button>
       </td>
