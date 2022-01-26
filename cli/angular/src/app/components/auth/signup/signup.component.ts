@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { SingupService } from "../../../services/singup.service";
 import { MatDialog } from "@angular/material/dialog";
-import { PopUpComponent } from "../../pop-up/pop-up.component";
+import { PopUpComponent } from "../../../common/pop-up/pop-up.component";
 import { AuthService } from '../../../services/auth.service';
 
 @Component({

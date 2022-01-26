@@ -1,2 +1,5 @@
-<p>main works!</p>
+<div class="container">
+  <mat-card class="card">Library</mat-card>
+  <app-books-table class="table" *ngIf="isDataAvailable" [booksData]="booksData" [userInfo]="userInfo"></app-books-table>
+</div>
 <div id="viewerCanvas"></div>

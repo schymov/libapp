@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
-export class TestService {
+export class BooksService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get(): Observable<any>{
+  getAllBooks(): Observable<any>{
     return this.httpClient.get(`http://localhost:3000/lib/books`);
   }
 }

@@ -1,0 +1,42 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="book">
+      <th class="book" mat-header-cell *matHeaderCellDef> Book </th>
+      <td class="book" mat-cell *matCellDef="let row"><img class="bookImg" src={{row.img}}></td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th class="name" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td class="name" mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <ng-container class="author" matColumnDef="author">
+      <th class="author" mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+      <td class="author" mat-cell *matCellDef="let row"> {{row.author}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="year">
+      <th class="year" mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+      <td class="year" mat-cell *matCellDef="let row"> {{row.year}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="favorite">
+      <th class="favorite" mat-header-cell *matHeaderCellDef> Favorite </th>
+      <td class="favorite" mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="favoriteClick(row._id)">
+          <mat-icon aria-label="Example icon-button with a heart icon" color="primary" [ngStyle]="{opacity: getOpacity(row.isFavorite)}">favorite</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+  <mat-paginator [pageSize]="6" [pageSizeOptions]="[6, 10, 20]"></mat-paginator>
+</div>
