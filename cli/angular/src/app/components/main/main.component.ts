@@ -38,8 +38,8 @@ export class MainComponent implements OnInit {
 
   getData() {
     forkJoin(
-      this.booksService.getAllBooks(),
-      this.userServise.getUserInfo(),
+      [this.booksService.getAllBooks(),
+        this.userServise.getUserInfo()]
     ).subscribe(([resultBooks, resultUser]) => {
       this.booksData = resultBooks;
       this.userInfo = resultUser;
