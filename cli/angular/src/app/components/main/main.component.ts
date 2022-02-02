@@ -34,10 +34,10 @@ export class MainComponent implements OnInit {
   }
 
   getData() {
-    forkJoin(
+    forkJoin([
       this.booksService.getAllBooks(),
-      this.userServise.getUserInfo()
-    ).subscribe(([resultBooks, resultUser]) => {
+      this.userServise.getUserInfo(),
+    ]).subscribe(([resultBooks, resultUser]) => {
       this.booksData = resultBooks;
       this.userInfo = resultUser;
       this.isDataAvailable = true;

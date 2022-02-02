@@ -5,6 +5,7 @@ module.exports.getUserInfo = async (req, res) => {
   try {
     const userInfo = await User.findOne({ id: req.params.id });
     if (userInfo) {
+      userInfo["pwd"] = "unknown";
       res.status(200).json(userInfo);
     } else {
       res.status(404).json({ message: "User info not found" });

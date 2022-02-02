@@ -8,11 +8,7 @@ export class UserService {
   userId: string;
 
   constructor(private httpClient: HttpClient) {
-    if (typeof this.user === "string") {
-      this.userId = JSON.parse(this.user).id
-    } else {
-      this.userId = ""
-    }
+    this.userId = typeof this.user === "string" ? JSON.parse(this.user).id : ""
   }
 
   getUserInfo() {
