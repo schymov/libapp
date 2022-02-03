@@ -16,9 +16,16 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { PopUpComponent } from './common/pop-up/pop-up.component';
 import { MainComponent } from './components/main/main.component';
 import { BooksTableComponent } from './common/books-table/books-table.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatSortModule} from "@angular/material/sort";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepicker, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import { UserPasswordChangeComponent } from './components/user/user-password-change/user-password-change.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +36,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MainComponent,
     PopUpComponent,
     BooksTableComponent,
+    UserEditComponent,
+    UserPasswordChangeComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,10 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
