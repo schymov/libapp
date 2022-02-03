@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { UserService } from '../../services/user.service';
 import { forkJoin } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 export interface Book {
   name: string;
@@ -20,6 +21,8 @@ export interface Book {
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
+
   booksData!: Book[];
   userInfo: any;
   isDataAvailable: boolean = false;

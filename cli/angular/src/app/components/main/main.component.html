@@ -1,9 +1,54 @@
-<div class="container">
-  <mat-card class="card">Library</mat-card>
-  <app-books-table
-    class="table"
-    *ngIf="isDataAvailable"
-    [booksData]="booksData"
-    [userInfo]="userInfo"
-  ></app-books-table>
-</div>
+<!-- <div id="viewerCanvas"></div> -->
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav position="end" mode="over">
+    <div class="sidenav-wrap">
+      <div class="user-image-wrap">
+        <img
+          class="user-image"
+          src="./../../../assets/empty-user-avatar.png"
+          alt="image: user avatar"
+        />
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="./favorites"
+        routerLinkActive="active"
+      >
+        favorite books
+      </button>
+      <button
+        mat-stroked-button
+        color="primary"
+        routerLink="./edit"
+        routerLinkActive="active"
+      >
+        edit user info
+      </button>
+      <div>user nickname</div>
+      <div>user email</div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <mat-card class="card">
+        <div class="card-wrap">
+          <div>Library</div>
+          <img
+            class="user-menu-btn"
+            src="./../../../assets/empty-user-avatar.png"
+            alt="icon: burger menu"
+            (click)="sidenav.open()"
+          />
+        </div>
+      </mat-card>
+      <app-books-table
+        class="table"
+        *ngIf="isDataAvailable"
+        [booksData]="booksData"
+        [userInfo]="userInfo"
+      ></app-books-table>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
