@@ -10,6 +10,8 @@ $ npm run server
  GET /user/{{id}}
  PATCH /user/{{id}}/favorites
 
-localhost:3000/auth/signup
-localhost:3000/auth/signin
-localhost:3000/main
+localhost:4200/auth/signup
+localhost:4200/auth/signin
+localhost:4200/main
+localhost:4200/user/favorites
+localhost:4200/user/edit

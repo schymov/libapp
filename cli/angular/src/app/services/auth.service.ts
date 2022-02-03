@@ -17,9 +17,4 @@ export class AuthService {
       authForm
     );
   }
-  // signup(): Observable<any> {}
-  // getAllBooks(): Observable<any> {}
-  // getFavoriteBooks(): Observable<any> {}
-
-  data: string = '';
 }
