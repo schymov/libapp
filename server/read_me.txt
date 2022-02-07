@@ -9,6 +9,8 @@ $ npm run server
  GET /user/{{id}}
  GET /user/{{id}}
  PATCH /user/{{id}}/favorites
+ PATCH /user/{{id}}/info
+ PATCH /user/{{id}}/password
 
 localhost:4200/auth/signup
 localhost:4200/auth/signin
