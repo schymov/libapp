@@ -1,5 +1,3 @@
-<!-- <div id="viewerCanvas"></div> -->
-
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav position="end" mode="over">
     <div class="sidenav-wrap">
@@ -10,24 +8,20 @@
           alt="image: user avatar"
         />
       </div>
-      <button
-        mat-raised-button
-        color="primary"
-        routerLink="./favorites"
-        routerLinkActive="active"
-      >
+      <button mat-raised-button color="primary" routerLink="../user/favorites">
         favorite books
       </button>
-      <button
-        mat-stroked-button
-        color="primary"
-        routerLink="./edit"
-        routerLinkActive="active"
-      >
+      <button mat-stroked-button color="primary" routerLink="../user/edit">
         edit user info
       </button>
-      <div>user nickname</div>
-      <div>user email</div>
+      <div>User nickname</div>
+      <div>User email</div>
+      <div style="display: flex">
+        <span style="margin-right: 6px">SignOut</span>
+        <mat-icon aria-hidden="false" color="primary" style="font-size: 18px">
+          logout
+        </mat-icon>
+      </div>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

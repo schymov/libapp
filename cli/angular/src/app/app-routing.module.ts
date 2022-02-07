@@ -16,7 +16,7 @@ const routes: Routes = [
     ],
   },
   { path: 'main', canActivate: [AuthGuard], component: MainComponent },
-  { path: '', redirectTo: 'auth/signin', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth/signin' },
 ];
 
