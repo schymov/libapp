@@ -10,7 +10,6 @@ import {
 import { SingupService } from "../../../services/singup.service";
 import { MatDialog } from "@angular/material/dialog";
 import { PopUpComponent } from "../../../common/pop-up/pop-up.component";
-import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-signup',

@@ -1,0 +1,85 @@
+<mat-card-title>ACCOUNT INFORMATION</mat-card-title>
+<mat-card-content class="form-container">
+  <form class="form" [formGroup]="userForm">
+
+    <div class="form-group">
+      <div class="imagePreview">
+        <mat-icon *ngIf="imageURL === ''" class="face">account_circle</mat-icon>
+        <img class="userAvatar" *ngIf="imageURL && imageURL !== ''" [src]="imageURL" [alt]="userForm.value.name">
+      </div>
+      <input formControlName="avatar" style="display: none" type="file" accept="image/*" id="input_file"
+             (change)="showPreview($event)"/>
+      <button
+        mat-stroked-button
+        color="primary"
+      >
+        <label for="input_file">Сhoose File</label>
+      </button>
+    </div>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput
+             formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput
+             type="email"
+             formControlName="email">
+    </mat-form-field>
+    <mat-error
+      *ngIf="
+          userForm.controls['email'].hasError('email') &&
+          !userForm.controls['email'].hasError('required')
+        "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="male">male</mat-option>
+        <mat-option value="female">female</mat-option>
+        <mat-option value="intersex">intersex</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Birth date</mat-label>
+      <input matInput [max]="maxDate" [matDatepicker]="picker" formControlName="birthdate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker startView="multi-year" #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-card-content>
+<mat-card-actions>
+  <button mat-stroked-button
+          color="primary"
+          routerLink="/user/changePassword"
+          routerLinkActive="active"
+  >
+    Change Password
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    routerLink="/main"
+    routerLinkActive="active"
+  >
+    Back
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="saveChanges()"
+    [disabled]="userForm.invalid || saveButtonDisabled"
+  >
+    Save
+  </button>
+</mat-card-actions>

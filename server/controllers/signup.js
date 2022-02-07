@@ -7,6 +7,9 @@ module.exports.signup = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       pwd: req.body.pwd,
+      birthdate: "",
+      gender: "",
+      avatar: "",
     });
     newUser
       .save()
