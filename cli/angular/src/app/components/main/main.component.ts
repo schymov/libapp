@@ -46,4 +46,8 @@ export class MainComponent implements OnInit {
       this.isDataAvailable = true;
     });
   }
+  getFromLocalStorage(key: string): any {
+    const localData = localStorage.getItem(key);
+    return localData ? JSON.parse(localData) : null;
+  }
 }

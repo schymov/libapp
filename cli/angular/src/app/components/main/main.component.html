@@ -14,13 +14,37 @@
       <button mat-stroked-button color="primary" routerLink="../user/edit">
         edit user info
       </button>
-      <div>User nickname</div>
-      <div>User email</div>
-      <div style="display: flex">
-        <span style="margin-right: 6px">SignOut</span>
-        <mat-icon aria-hidden="false" color="primary" style="font-size: 18px">
-          logout
-        </mat-icon>
+      <div class="user-info">
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> person </mat-icon>
+          <span>{{ userInfo?.username }}</span>
+        </div>
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> email </mat-icon>
+          <span>{{ userInfo?.email }}</span>
+        </div>
+        <div class="user-info__item" [ngSwitch]="userInfo?.gender">
+          <mat-icon aria-hidden="false" *ngSwitchCase="'male'"> male </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchCase="'female'">
+            female
+          </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchCase="'intersex'">
+            transgender
+          </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchDefault> male </mat-icon>
+          <span>{{ userInfo?.gender ? userInfo?.gender : "unkown" }}</span>
+        </div>
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> cake </mat-icon>
+          <span>{{ userInfo?.birthday ? userInfo?.birthday : "unkown" }}</span>
+        </div>
+        <div
+          class="user-info__item user-info__item_signout"
+          routerLink="../auth/signin"
+        >
+          <mat-icon aria-hidden="false"> logout </mat-icon>
+          <span>signout</span>
+        </div>
       </div>
     </div>
   </mat-sidenav>

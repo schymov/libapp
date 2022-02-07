@@ -68,3 +68,24 @@
 .mat-sidenav {
   width: 300px;
 }
+
+.user-info {
+  margin-top: 12px;
+  mat-icon {
+    font-size: 18px;
+    margin-left: 6px;
+  }
+  &__item {
+    display: flex;
+    margin-bottom: 4px;
+    transition: 0.2s;
+    &_signout {
+      cursor: pointer;
+      color: #3f51b5;
+      font-weight: 500;
+      &:hover {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
