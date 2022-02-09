@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UserService } from '../../services/user.service';
 import { Book } from '../../components/main/main.component';
+import { Router } from '@angular/router';
 
 declare const google: any;
 
@@ -24,20 +25,19 @@ export class BooksTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private userServise: UserService) {}
+  constructor(private userServise: UserService, private router: Router) {}
 
   ngOnInit() {
     google.books.load();
     this.booksData.forEach((book: Book) => {
       book.isFavorite = this.userInfo.favorites.includes(book._id);
     });
-    this.dataSource = new MatTableDataSource(this.booksData);
+    this.filterByFavorites();
+    this.dataSource = new MatTableDataSource(this.dataSourceSelection());
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    // console.log(this.userInfo);
-    console.log(this.booksData);
-    this.filterByFavorites();
   }
+
   applyFilter(filterValue: any): void {
     this.dataSource.filter = filterValue.value.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -77,6 +77,10 @@ export class BooksTableComponent implements OnInit {
     this.favoritesBooksData = this.booksData?.filter((elem) => {
       return elem.isFavorite === true;
     });
-    console.log(this.favoritesBooksData);
+  }
+  dataSourceSelection() {
+    return this.router.url === '/main'
+      ? this.booksData
+      : this.favoritesBooksData;
   }
 }

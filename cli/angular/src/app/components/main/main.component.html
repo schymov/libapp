@@ -8,8 +8,11 @@
           alt="image: user avatar"
         />
       </div>
-      <button mat-raised-button color="primary">
-        <!-- <button mat-raised-button color="primary" routerLink="../user/favorites"> -->
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="goToNewLocation('/user/favorites')"
+      >
         favorite books
       </button>
       <button mat-stroked-button color="primary" routerLink="../user/edit">
@@ -41,7 +44,7 @@
         </div>
         <div
           class="user-info__item user-info__item_signout"
-          routerLink="../auth/signin"
+          (click)="signOut()"
         >
           <mat-icon aria-hidden="false"> logout </mat-icon>
           <span>signout</span>
@@ -56,7 +59,7 @@
           <mat-icon
             class="card-wrap__icon"
             aria-hidden="false"
-            routerLink="../main"
+            (click)="goToNewLocation('/main')"
           >
             home
           </mat-icon>

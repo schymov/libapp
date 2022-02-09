@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { UserService } from '../../services/user.service';
@@ -29,7 +30,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private booksService: BooksService,
-    private userServise: UserService
+    private userServise: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +48,13 @@ export class MainComponent implements OnInit {
       this.isDataAvailable = true;
     });
   }
-  getFromLocalStorage(key: string): any {
-    const localData = localStorage.getItem(key);
-    return localData ? JSON.parse(localData) : null;
+
+  goToNewLocation(value: string): void {
+    const newLocation = window.location.origin + value;
+    window.location.replace(newLocation);
+  }
+  signOut(): void {
+    this.router.navigateByUrl('auth/signin');
+    localStorage.removeItem('userInfo');
   }
 }

@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { PopUpComponent } from 'src/app/common/pop-up/pop-up.component';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -15,7 +18,11 @@ export class SigninComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private dialogRef: MatDialog
+  ) {}
 
   ngOnInit(): void {}
 
@@ -35,12 +42,32 @@ export class SigninComponent implements OnInit {
   }
 
   signIn() {
-    this.authService
-      .signin(this.authForm.value)
-      .subscribe((result: { token: string }) => {
+    this.authService.signin(this.authForm.value).subscribe({
+      next: (result: { token: string }) => {
         const tokenData = this.parseJwt(result.token.split(' ')[1]);
         localStorage.setItem('userInfo', JSON.stringify(tokenData));
         this.router.navigateByUrl('/main');
-      });
+      },
+      error: (err: HttpErrorResponse) => {
+        this.dialogRef.open(PopUpComponent, {
+          data: {
+            message: this.getErrorMessage(err.status),
+            buttonText: 'Ok',
+            redirect: '',
+          },
+        });
+      },
+    });
+  }
+
+  getErrorMessage(status: number) {
+    switch (status) {
+      case 401:
+        return 'That password was incorrect. Please try again';
+      case 404:
+        return 'User not found. Please try again';
+      default:
+        return 'Invalid request';
+    }
   }
 }

@@ -20,20 +20,25 @@ const routes: Routes = [
   },
   { path: 'main', canActivate: [AuthGuard], component: MainComponent },
   {
+    path: 'user/favorites',
+    canActivate: [AuthGuard],
+    component: MainComponent,
+  },
+  {
     path: 'user',
     canActivate: [AuthGuard],
     component: UserComponent,
     children: [
       { path: 'edit', canActivate: [AuthGuard], component: UserEditComponent },
       {
-        path: 'changePassword',
+        path: 'change-password',
         canActivate: [AuthGuard],
         component: UserPasswordChangeComponent,
       },
     ],
   },
-  { path: '', redirectTo: 'auth/signin', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth/signin' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main' },
 ];
 
 @NgModule({
