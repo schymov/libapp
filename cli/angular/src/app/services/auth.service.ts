@@ -17,6 +17,4 @@ export class AuthService {
       authForm
     );
   }
-
-  data: string = '';
 }
