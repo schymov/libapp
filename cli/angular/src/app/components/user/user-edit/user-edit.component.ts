@@ -19,7 +19,7 @@ interface userInfo {
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.scss']
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
 
@@ -42,26 +42,25 @@ export class UserEditComponent implements OnInit {
     this.getUserData();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getUserData() {
-    this.userService.getUserInfo().subscribe(result => {
+    this.userService.getUserInfo().subscribe((result) => {
       this.userInfo = result;
       this.userForm.patchValue({
         username: this.userInfo.username,
         email: this.userInfo.email,
         gender: this.userInfo.gender,
         birthdate: this.userInfo.birthdate,
-      })
+      });
       this.imageService.getImage(this.userInfo._id).subscribe(result => {
         this.imageURL = result.toString();
       });
       this.startValue = this.userForm.value;
-      this.userForm.valueChanges.subscribe(result => {
+      this.userForm.valueChanges.subscribe((result) => {
         this.saveButtonDisabled = this.startValue === result;
-      })
-    })
+      });
+    });
   }
 
   showPreview(event: any) {
@@ -77,14 +76,18 @@ export class UserEditComponent implements OnInit {
 
   saveChanges() {
     this.imageService.addImage(this.userInfo._id, this.image);
-    this.userService.changeUserInfo(this.userForm.value).subscribe(result => {
+    this.userService.changeUserInfo(this.userForm.value).subscribe((result) => {
       this.dialogRef.open(PopUpComponent, {
         data: {
-          message: "Changes was successfully saved",
-          buttonText: "Ok",
-          redirect: "/main",
-        }
+          message: 'Changes was successfully saved',
+          buttonText: 'Ok',
+          redirect: '/main',
+        },
       });
-    })
+    });
+  }
+  goToMain() {
+    const mainLocation = window.location.origin + '/main';
+    window.location.replace(mainLocation);
   }
 }

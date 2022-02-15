@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { BooksService } from "../../services/books.service";
-import { UserService } from "../../services/user.service";
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BooksService } from '../../services/books.service';
+import { UserService } from '../../services/user.service';
 import { forkJoin } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 export interface Book {
-  name: string,
-  author: string,
-  year: string,
-  img: string,
-  id: string,
-  _id: string,
-  isActive: boolean,
-  isFavorite: boolean,
+  name: string;
+  author: string;
+  year: string;
+  img: string;
+  id: string;
+  _id: string;
+  isActive: boolean;
+  isFavorite: boolean;
 }
-
-declare const google: any;
 
 @Component({
   selector: 'app-main',
@@ -22,39 +22,39 @@ declare const google: any;
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
 
   booksData!: Book[];
   userInfo: any;
   isDataAvailable: boolean = false;
 
-  constructor(private booksService: BooksService, private userServise: UserService) {
-  }
+  constructor(
+    private booksService: BooksService,
+    private userServise: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getData();
-    //test opening bookreader
-    //this.bookreader('F1QDAAAAQAAJ');
   }
 
   getData() {
-    forkJoin(
-      [this.booksService.getAllBooks(),
-        this.userServise.getUserInfo()]
-    ).subscribe(([resultBooks, resultUser]) => {
+    forkJoin([
+      this.booksService.getAllBooks(),
+      this.userServise.getUserInfo(),
+    ]).subscribe(([resultBooks, resultUser]) => {
       this.booksData = resultBooks;
       this.userInfo = resultUser;
       this.isDataAvailable = true;
-    })
+    });
   }
-  bookreader(id: string) {
-    google.books.load();
 
-    function initialize(id: string) {
-      const viewer = new google.books.DefaultViewer(
-        document.getElementById('viewerCanvas')
-      );
-      viewer.load(id);
-    }
-    google.books.setOnLoadCallback(() => initialize(id));
+  goToNewLocation(value: string): void {
+    const newLocation = window.location.origin + value;
+    window.location.replace(newLocation);
+  }
+  signOut(): void {
+    this.router.navigateByUrl('auth/signin');
+    localStorage.removeItem('userInfo');
   }
 }
