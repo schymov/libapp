@@ -12,6 +12,8 @@ interface userInfo {
   pwd: string,
   username: string,
   _id: string,
+  gender: string,
+  birthdate: string,
 }
 
 @Component({
@@ -30,7 +32,7 @@ export class UserEditComponent implements OnInit {
       avatar: new FormControl("", [Validators.nullValidator]),
     }
   );
-  startValue!: any;
+  startValue!: userInfo;
   saveButtonDisabled: boolean = true;
   image!: any;
   imageURL: string = "";
