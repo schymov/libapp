@@ -1,9 +1,83 @@
-<div class="container">
-  <mat-card class="card">Library</mat-card>
-  <app-books-table
-    class="table"
-    *ngIf="isDataAvailable"
-    [booksData]="booksData"
-    [userInfo]="userInfo"
-  ></app-books-table>
-</div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav position="end" mode="over">
+    <div class="sidenav-wrap">
+      <div class="user-image-wrap">
+        <img
+          class="user-image"
+          src="./../../../assets/empty-user-avatar.png"
+          alt="image: user avatar"
+        />
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="goToNewLocation('/user/favorites')"
+      >
+        favorite books
+      </button>
+      <button mat-stroked-button color="primary" routerLink="../user/edit">
+        edit user info
+      </button>
+      <div class="user-info">
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> person </mat-icon>
+          <span>{{ userInfo?.username }}</span>
+        </div>
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> email </mat-icon>
+          <span>{{ userInfo?.email }}</span>
+        </div>
+        <div class="user-info__item" [ngSwitch]="userInfo?.gender">
+          <mat-icon aria-hidden="false" *ngSwitchCase="'male'"> male </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchCase="'female'">
+            female
+          </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchCase="'intersex'">
+            transgender
+          </mat-icon>
+          <mat-icon aria-hidden="false" *ngSwitchDefault> male </mat-icon>
+          <span>{{ userInfo?.gender ? userInfo?.gender : "unkown" }}</span>
+        </div>
+        <div class="user-info__item">
+          <mat-icon aria-hidden="false"> cake </mat-icon>
+          <span>{{ userInfo?.birthday ? userInfo?.birthday : "unkown" }}</span>
+        </div>
+        <div
+          class="user-info__item user-info__item_signout"
+          (click)="signOut()"
+        >
+          <mat-icon aria-hidden="false"> logout </mat-icon>
+          <span>signout</span>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <mat-card class="card">
+        <div class="card-wrap">
+          <mat-icon
+            class="card-wrap__icon"
+            aria-hidden="false"
+            (click)="goToNewLocation('/main')"
+          >
+            home
+          </mat-icon>
+          <div>Library</div>
+          <img
+            class="card-wrap__img"
+            src="./../../../assets/empty-user-avatar.png"
+            alt="icon: burger menu"
+            (click)="sidenav.open()"
+          />
+        </div>
+      </mat-card>
+      <app-books-table
+        class="card-wrap__table"
+        *ngIf="isDataAvailable"
+        [booksData]="booksData"
+        [userInfo]="userInfo"
+      ></app-books-table>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

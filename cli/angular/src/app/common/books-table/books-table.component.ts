@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UserService } from '../../services/user.service';
 import { Book } from '../../components/main/main.component';
+import { Router } from '@angular/router';
 
 declare const google: any;
 
@@ -14,6 +15,7 @@ declare const google: any;
 })
 export class BooksTableComponent implements OnInit {
   toggleReader = true;
+  favoritesBooksData: Book[] = [];
   @Input() userInfo: any;
   @Input() booksData!: Book[];
 
@@ -23,24 +25,26 @@ export class BooksTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private userServise: UserService) {}
+  constructor(private userServise: UserService, private router: Router) {}
 
   ngOnInit() {
     google.books.load();
     this.booksData.forEach((book: Book) => {
       book.isFavorite = this.userInfo.favorites.includes(book._id);
     });
-    this.dataSource = new MatTableDataSource(this.booksData);
+    this.filterByFavorites();
+    this.dataSource = new MatTableDataSource(this.dataSourceSelection());
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  applyFilter(filterValue: any) {
+
+  applyFilter(filterValue: any): void {
     this.dataSource.filter = filterValue.value.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-  getOpacity(isFavourite: boolean) {
+  getOpacity(isFavourite: boolean): number {
     return isFavourite ? 1 : 0.2;
   }
   favoriteClick(id: string, e: Event) {
@@ -54,18 +58,29 @@ export class BooksTableComponent implements OnInit {
     });
   }
 
-  initialize(id: any) {
+  initialize(id: any): void {
     this.openReader();
     const reader = document.getElementById('viewerCanvas');
     const viewer = new google.books.DefaultViewer(reader);
     viewer.load(id);
   }
 
-  openReader() {
+  openReader(): void {
     this.toggleReader = !this.toggleReader;
   }
 
-  closeReader() {
+  closeReader(): void {
     this.toggleReader = !this.toggleReader;
+  }
+
+  filterByFavorites() {
+    this.favoritesBooksData = this.booksData?.filter((elem) => {
+      return elem.isFavorite === true;
+    });
+  }
+  dataSourceSelection() {
+    return this.router.url === '/main'
+      ? this.booksData
+      : this.favoritesBooksData;
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { UserService } from '../../services/user.service';
 import { forkJoin } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 export interface Book {
   name: string;
@@ -20,13 +22,16 @@ export interface Book {
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav | undefined;
+
   booksData!: Book[];
   userInfo: any;
   isDataAvailable: boolean = false;
 
   constructor(
     private booksService: BooksService,
-    private userServise: UserService
+    private userServise: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,5 +47,14 @@ export class MainComponent implements OnInit {
       this.userInfo = resultUser;
       this.isDataAvailable = true;
     });
+  }
+
+  goToNewLocation(value: string): void {
+    const newLocation = window.location.origin + value;
+    window.location.replace(newLocation);
+  }
+  signOut(): void {
+    this.router.navigateByUrl('auth/signin');
+    localStorage.removeItem('userInfo');
   }
 }
