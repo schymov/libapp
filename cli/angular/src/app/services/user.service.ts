@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {FormControl, Validators} from "@angular/forms";
+import { Observable } from "rxjs";
 
 interface UserForm {
   avatar: string,
@@ -23,6 +22,8 @@ export interface userInfo {
   pwd: string,
   username: string,
   _id: string,
+  gender: string,
+  birthdate: string,
 }
 
 @Injectable({ providedIn: 'root' })

@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,8 @@ const signin = require("./routes/signin");
 const signup = require("./routes/signup");
 const books = require("./routes/books");
 const user = require("./routes/user");
+const images = require("./routes/images");
+
 
 app.get("/", (req, res) => {
   res.send("server started!");
@@ -35,5 +38,7 @@ app.use("/auth/signin", signin);
 app.use("/auth/signup", signup);
 app.use("/lib/books", books);
 app.use("/user", user);
+app.use('/images', express.static(path.join('images')));
+app.use('/user/images', images);
 
 module.exports = app;

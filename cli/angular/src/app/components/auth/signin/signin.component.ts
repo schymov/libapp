@@ -46,7 +46,8 @@ export class SigninComponent implements OnInit {
       next: (result: { token: string }) => {
         const tokenData = this.parseJwt(result.token.split(' ')[1]);
         localStorage.setItem('userInfo', JSON.stringify(tokenData));
-        this.router.navigateByUrl('/main');
+        const redirectUrl = window.location.origin + '/main';
+        window.location.replace(redirectUrl);
       },
       error: (err: HttpErrorResponse) => {
         this.dialogRef.open(PopUpComponent, {

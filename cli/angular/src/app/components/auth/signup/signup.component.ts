@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   signUp() {
-    this.singupService.postUser(this.authForm.value).subscribe((result) => {
+    this.singupService.postUser(this.authForm.value).subscribe(() => {
       this.dialogRef.open(PopUpComponent, {
         data: {
           message: "Registration was successfully completed",

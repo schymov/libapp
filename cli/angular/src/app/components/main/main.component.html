@@ -2,11 +2,15 @@
   <mat-sidenav #sidenav position="end" mode="over">
     <div class="sidenav-wrap">
       <div class="user-image-wrap">
+        <div class="image-preview">
+        <mat-icon *ngIf="imageURL === ''" class="face">account_circle</mat-icon>
         <img
           class="user-image"
-          src="./../../../assets/empty-user-avatar.png"
+          *ngIf="imageURL && imageURL !== ''"
+          [src]="imageURL"
           alt="image: user avatar"
         />
+      </div>
       </div>
       <button
         mat-raised-button
