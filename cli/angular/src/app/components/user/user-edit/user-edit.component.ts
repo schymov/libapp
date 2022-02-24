@@ -34,15 +34,16 @@ export class UserEditComponent implements OnInit {
   );
   startValue!: userInfo;
   saveButtonDisabled: boolean = true;
-  image!: any;
+  image: any = null;
   imageURL: string = "";
   userInfo!: any;
   maxDate: Date = new Date();
   constructor(private userService: UserService, private imageService: ImageService, private router: Router, private dialogRef: MatDialog) {
-    this.getUserData();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUserData();
+  }
 
   getUserData() {
     this.userService.getUserInfo().subscribe((result) => {
@@ -75,7 +76,9 @@ export class UserEditComponent implements OnInit {
   }
 
   saveChanges() {
-    this.imageService.addImage(this.userInfo._id, this.image);
+    if (this.image) {
+      this.imageService.addImage(this.userInfo._id, this.image);
+    }
     this.userService.changeUserInfo(this.userForm.value).subscribe((result) => {
       this.dialogRef.open(PopUpComponent, {
         data: {
@@ -86,6 +89,7 @@ export class UserEditComponent implements OnInit {
       });
     });
   }
+
   goToMain() {
     const mainLocation = window.location.origin + '/main';
     window.location.replace(mainLocation);

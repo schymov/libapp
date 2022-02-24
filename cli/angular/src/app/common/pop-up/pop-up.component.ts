@@ -27,7 +27,8 @@ export class PopUpComponent implements OnInit {
 
   redirect() {
     if (this.data.redirect !== "") {
-      this.router.navigateByUrl(this.data.redirect)
+      const redirectUrl = window.location.origin + this.data.redirect;
+      window.location.replace(redirectUrl);
     }
   }
 }
