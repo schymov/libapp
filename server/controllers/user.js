@@ -3,7 +3,7 @@ const errorHandler = require("../utils/error-handler");
 
 module.exports.getUserInfo = async (req, res) => {
   try {
-    const userInfo = await User.findOne({ id: req.params.id });
+    const userInfo = await User.findOne({ _id: req.params.id });
     if (userInfo) {
       userInfo["pwd"] = "unknown";
       res.status(200).json(userInfo);
@@ -17,7 +17,7 @@ module.exports.getUserInfo = async (req, res) => {
 
 module.exports.updateFavorites = async (req, res) => {
   try {
-    const userInfo = await User.findOne({ id: req.params.id });
+    const userInfo = await User.findOne({ _id: req.params.id });
     if (userInfo) {
       const userFavorites = userInfo.favorites;
       const bookId = req.body.bookId;
@@ -29,7 +29,7 @@ module.exports.updateFavorites = async (req, res) => {
       }
 
       const updatedUser = await User.findOneAndUpdate(
-        { id: req.params.id },
+        { _id: req.params.id },
         { $set: { favorites: userFavorites } },
         { new: true }
       );
@@ -44,10 +44,10 @@ module.exports.updateFavorites = async (req, res) => {
 
 module.exports.updateInfo = async (req, res) => {
   try {
-    const userInfo = await User.findOne({ id: req.params.id });
+    const userInfo = await User.findOne({ _id: req.params.id });
     if (userInfo) {
       const updatedUser = await User.findOneAndUpdate(
-          { id: req.params.id },
+          { _id: req.params.id },
           { $set: {
             avatar: req.body.avatar,
               email: req.body.email,
@@ -68,11 +68,11 @@ module.exports.updateInfo = async (req, res) => {
 
 module.exports.updatePassword = async (req, res) => {
   try {
-    const userInfo = await User.findOne({ id: req.params.id });
+    const userInfo = await User.findOne({ _id: req.params.id });
     if (userInfo) {
       if (req.body.password === userInfo.pwd) {
         const updatedUser = await User.findOneAndUpdate(
-            { id: req.params.id },
+            { _id: req.params.id },
             { $set: { pwd: req.body.newPassword }},
             { new: true }
         );

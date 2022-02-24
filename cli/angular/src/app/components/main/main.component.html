@@ -68,12 +68,15 @@
             home
           </mat-icon>
           <div>Library</div>
-          <img
-            class="card-wrap__img"
-            src="./../../../assets/empty-user-avatar.png"
-            alt="icon: burger menu"
-            (click)="sidenav.open()"
-          />
+          <div class="card-wrap__img" (click)="sidenav.open()">
+            <mat-icon *ngIf="imageURL === ''" class="face">account_circle</mat-icon>
+            <img
+              class="user-image"
+              *ngIf="imageURL && imageURL !== ''"
+              [src]="imageURL"
+              alt="icon: burger menu"
+            />
+          </div>
         </div>
       </mat-card>
       <app-books-table
