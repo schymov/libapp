@@ -30,6 +30,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { UserPasswordChangeComponent } from './components/user/user-password-change/user-password-change.component';
 import { UserComponent } from './components/user/user.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
