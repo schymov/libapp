@@ -22,14 +22,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {
-  MatDatepicker,
-  MatDatepickerModule,
-} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { UserPasswordChangeComponent } from './components/user/user-password-change/user-password-change.component';
 import { UserComponent } from './components/user/user.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -64,6 +63,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
