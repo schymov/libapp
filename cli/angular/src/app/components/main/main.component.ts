@@ -4,7 +4,7 @@ import { BooksService } from '../../services/books.service';
 import { UserService } from '../../services/user.service';
 import { forkJoin } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
-import {ImageService} from '../../services/image.service';
+import { ImageService } from '../../services/image.service';
 
 export interface Book {
   name: string;
@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
   booksData!: Book[];
   userInfo: any;
   isDataAvailable: boolean = false;
-  imageURL: string = "";
+  imageURL: string = '';
 
   constructor(
     private booksService: BooksService,
@@ -48,8 +48,9 @@ export class MainComponent implements OnInit {
     ]).subscribe(([resultBooks, resultUser]) => {
       this.booksData = resultBooks;
       this.userInfo = resultUser;
-      this.imageService.getImage(this.userInfo._id).subscribe(result => {
+      this.imageService.getImage(this.userInfo._id).subscribe((result) => {
         this.imageURL = result.toString();
+        console.log(result);
       });
       this.isDataAvailable = true;
     });
