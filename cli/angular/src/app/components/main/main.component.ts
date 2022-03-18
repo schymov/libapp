@@ -5,6 +5,8 @@ import { UserService } from '../../services/user.service';
 import { forkJoin } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ImageService } from '../../services/image.service';
+import { SwPush } from '@angular/service-worker';
+import { NotificationService } from '../../services/notification.service';
 
 export interface Book {
   name: string;
@@ -29,12 +31,16 @@ export class MainComponent implements OnInit {
   userInfo: any;
   isDataAvailable: boolean = false;
   imageURL: string = '';
+  readonly VAPID_PUBLIC_KEY =
+    'BBRVQ_0ZBnsZTJ5eQezUyf5z1eW2AZqLfR73wYSqU1VBUYI3yhi1f24aAwLRpzvzNqcoz5pCCRiwTQj7APZqqZg';
 
   constructor(
     private booksService: BooksService,
     private userService: UserService,
     private imageService: ImageService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService,
+    private swPush: SwPush
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +69,18 @@ export class MainComponent implements OnInit {
   signOut(): void {
     this.router.navigateByUrl('auth/signin');
     localStorage.removeItem('userInfo');
+  }
+
+  subscribeToNotifications() {
+    if (this.swPush.isEnabled) {
+      this.swPush
+        .requestSubscription({
+          serverPublicKey: this.VAPID_PUBLIC_KEY,
+        })
+        .then((sub) => {
+          this.notificationService.postSubscription(sub).subscribe();
+        })
+        .catch(console.error);
+    }
   }
 }

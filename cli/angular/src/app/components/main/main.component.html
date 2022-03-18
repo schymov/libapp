@@ -3,14 +3,16 @@
     <div class="sidenav-wrap">
       <div class="user-image-wrap">
         <div class="image-preview">
-        <mat-icon *ngIf="imageURL === ''" class="face">account_circle</mat-icon>
-        <img
-          class="user-image"
-          *ngIf="imageURL && imageURL !== ''"
-          [src]="imageURL"
-          alt="image: user avatar"
-        />
-      </div>
+          <mat-icon *ngIf="imageURL === ''" class="face"
+            >account_circle</mat-icon
+          >
+          <img
+            class="user-image"
+            *ngIf="imageURL && imageURL !== ''"
+            [src]="imageURL"
+            alt="image: user avatar"
+          />
+        </div>
       </div>
       <button
         mat-raised-button
@@ -68,14 +70,26 @@
             home
           </mat-icon>
           <div>Library</div>
-          <div class="card-wrap__img" (click)="sidenav.open()">
-            <mat-icon *ngIf="imageURL === ''" class="face">account_circle</mat-icon>
-            <img
-              class="user-image"
-              *ngIf="imageURL && imageURL !== ''"
-              [src]="imageURL"
-              alt="icon: burger menu"
-            />
+          <div style="display: flex">
+            <button
+              mat-raised-button
+              color="primary"
+              style="margin-right: 15px"
+              (click)="subscribeToNotifications()"
+            >
+              Subscribe to notification
+            </button>
+            <div class="card-wrap__img" (click)="sidenav.open()">
+              <mat-icon *ngIf="imageURL === ''" class="face"
+                >account_circle</mat-icon
+              >
+              <img
+                class="user-image"
+                *ngIf="imageURL && imageURL !== ''"
+                [src]="imageURL"
+                alt="icon: burger menu"
+              />
+            </div>
           </div>
         </div>
       </mat-card>
