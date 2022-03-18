@@ -12,7 +12,7 @@ const signup = require("./routes/signup");
 const books = require("./routes/books");
 const user = require("./routes/user");
 const images = require("./routes/images");
-
+const notifications = require("./routes/notifications");
 
 app.get("/", (req, res) => {
   res.send("server started!");
@@ -38,7 +38,8 @@ app.use("/auth/signin", signin);
 app.use("/auth/signup", signup);
 app.use("/lib/books", books);
 app.use("/user", user);
-app.use('/images', express.static(path.join('images')));
-app.use('/user/images', images);
+app.use("/images", express.static(path.join("images")));
+app.use("/user/images", images);
+app.use("/subscribe", notifications);
 
 module.exports = app;
