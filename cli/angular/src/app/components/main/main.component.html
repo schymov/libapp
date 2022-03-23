@@ -48,10 +48,17 @@
           <mat-icon aria-hidden="false"> cake </mat-icon>
           <span>{{ userInfo?.birthday ? userInfo?.birthday : "unkown" }}</span>
         </div>
-        <div
-          class="user-info__item user-info__item_signout"
-          (click)="signOut()"
-        >
+        <div class="user-info__item user-info__item_action">
+          <mat-icon aria-hidden="false"> upload </mat-icon>
+          <label for="input_file">upload book</label>
+          <input
+            style="display: none"
+            type="file"
+            accept=".pdf"
+            id="input_file"
+          />
+        </div>
+        <div class="user-info__item user-info__item_action" (click)="signOut()">
           <mat-icon aria-hidden="false"> logout </mat-icon>
           <span>signout</span>
         </div>
