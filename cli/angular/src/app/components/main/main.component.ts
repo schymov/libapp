@@ -1,3 +1,4 @@
+import { UploadService } from './../../services/upload.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BooksService } from '../../services/books.service';
@@ -7,6 +8,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ImageService } from '../../services/image.service';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from '../../services/notification.service';
+import { PopUpComponent } from 'src/app/common/pop-up/pop-up.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface Book {
   name: string;
@@ -31,6 +34,8 @@ export class MainComponent implements OnInit {
   userInfo: any;
   isDataAvailable: boolean = false;
   imageURL: string = '';
+  newBook: any;
+  newBookUrl: string = '';
   readonly VAPID_PUBLIC_KEY =
     'BBRVQ_0ZBnsZTJ5eQezUyf5z1eW2AZqLfR73wYSqU1VBUYI3yhi1f24aAwLRpzvzNqcoz5pCCRiwTQj7APZqqZg';
 
@@ -38,9 +43,11 @@ export class MainComponent implements OnInit {
     private booksService: BooksService,
     private userService: UserService,
     private imageService: ImageService,
+    private uploadService: UploadService,
     private router: Router,
     private notificationService: NotificationService,
-    private swPush: SwPush
+    private swPush: SwPush,
+    private dialogRef: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +63,6 @@ export class MainComponent implements OnInit {
       this.userInfo = resultUser;
       this.imageService.getImage(this.userInfo._id).subscribe((result) => {
         this.imageURL = result.toString();
-        console.log(result);
       });
       this.isDataAvailable = true;
     });
@@ -70,7 +76,6 @@ export class MainComponent implements OnInit {
     this.router.navigateByUrl('auth/signin');
     localStorage.removeItem('userInfo');
   }
-
   subscribeToNotifications() {
     if (this.swPush.isEnabled) {
       this.swPush
@@ -82,5 +87,18 @@ export class MainComponent implements OnInit {
         })
         .catch(console.error);
     }
+  }
+  saveInputFile(event: any) {
+    this.newBook = event.target.files[0];
+    if (this.newBook) {
+      this.uploadService.addUpload(this.newBook);
+    }
+    this.dialogRef.open(PopUpComponent, {
+      data: {
+        message: 'The file was successfully uploaded',
+        buttonText: 'Ok',
+        redirect: '',
+      },
+    });
   }
 }
