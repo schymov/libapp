@@ -59,6 +59,13 @@
             (change)="saveInputFile($event)"
           />
         </div>
+        <div
+          class="user-info__item user-info__item_action"
+          routerLink="/uploaded-list"
+        >
+          <mat-icon aria-hidden="false"> list </mat-icon>
+          <span>uploaded list</span>
+        </div>
         <div class="user-info__item user-info__item_action" (click)="signOut()">
           <mat-icon aria-hidden="false"> logout </mat-icon>
           <span>signout</span>

@@ -32,6 +32,7 @@ import { UserComponent } from './components/user/user.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { UploadedListComponent } from './components/main/uploaded-list/uploaded-list.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { environment } from '../environments/environment';
     UserEditComponent,
     UserPasswordChangeComponent,
     UserComponent,
+    UploadedListComponent,
   ],
   imports: [
     BrowserModule,

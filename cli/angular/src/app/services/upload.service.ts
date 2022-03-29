@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 interface Upload {
   _id: string;
@@ -14,19 +14,19 @@ export class UploadService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getUpload(userId: string) {
-    // return this.httpClient.get(`http://localhost:3000/user/images/${userId}`);
+  getUpload(): Observable<Array<string>> {
+    return this.httpClient.get<Array<string>>(
+      'http://localhost:3000/lib/upload'
+    );
   }
   addUpload(file: File): void {
     const fileData = new FormData();
+
     fileData.append('file', file);
     this.httpClient
       .post<Upload>('http://localhost:3000/lib/upload', fileData)
-      .subscribe((fileData) => {
-        const book: Upload = { ...fileData };
-        // console.log(book);
-        // this.newBooks.push(book);
-        // this.newBooks$.next(this.newBooks);
+      .subscribe((fileData: Upload) => {
+        // const book: Upload = { ...fileData };
       });
   }
 }
