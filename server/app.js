@@ -12,6 +12,7 @@ const signup = require("./routes/signup");
 const books = require("./routes/books");
 const user = require("./routes/user");
 const images = require("./routes/images");
+const upload = require("./routes/upload");
 const notifications = require("./routes/notifications");
 
 app.get("/", (req, res) => {
@@ -37,9 +38,11 @@ app.use(cors());
 app.use("/auth/signin", signin);
 app.use("/auth/signup", signup);
 app.use("/lib/books", books);
+app.use("/lib/upload", upload);
 app.use("/user", user);
-app.use("/images", express.static(path.join("images")));
 app.use("/user/images", images);
 app.use("/subscribe", notifications);
+app.use("/images", express.static(path.join("images")));
+app.use("/upload", express.static(path.join("upload")));
 
 module.exports = app;

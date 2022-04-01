@@ -1,3 +1,4 @@
+import { UploadedListComponent } from './components/main/uploaded-list/uploaded-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
@@ -19,6 +20,11 @@ const routes: Routes = [
     ],
   },
   { path: 'main', canActivate: [AuthGuard], component: MainComponent },
+  {
+    path: 'uploaded-list',
+    canActivate: [AuthGuard],
+    component: UploadedListComponent,
+  },
   {
     path: 'user/favorites',
     canActivate: [AuthGuard],

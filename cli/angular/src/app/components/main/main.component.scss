@@ -120,12 +120,15 @@
     display: flex;
     margin-bottom: 4px;
     transition: 0.2s;
-    &_signout {
+    &_action {
       cursor: pointer;
       color: #3f51b5;
       font-weight: 500;
       &:hover {
         transform: scale(0.98);
+      }
+      label {
+        cursor: pointer;
       }
     }
   }

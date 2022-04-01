@@ -1,0 +1,14 @@
+<div class="wrap">
+  <mat-icon class="home" aria-hidden="false" (click)="goToNewLocation('/main')">
+    home
+  </mat-icon>
+  <ul>
+    <li
+      class="item"
+      *ngFor="let i of uploadedList$ | async"
+      (click)="openBook(i)"
+    >
+      {{ i }}
+    </li>
+  </ul>
+</div>
